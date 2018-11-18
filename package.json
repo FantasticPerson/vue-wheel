@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/FantasticPerson/vue-wheel/issues"
   },
-  "homepage": "https://github.com/FantasticPerson/vue-wheel#readme"
+  "homepage": "https://github.com/FantasticPerson/vue-wheel#readme",
+  "dependencies": {
+    "vue": "2.5.17"
+  }
 }
