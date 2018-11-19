@@ -8,7 +8,11 @@
     </button>
 </template>
 <script>
+import Icon from './icon'
 export default {
+    components: {
+      'g-icon': Icon
+    },
     props:{
         icon:{},
         iconPosition:{
@@ -27,12 +31,12 @@ export default {
 </script>
 <style lang="scss">
 @keyframes spin {
-    0%{
-        transform: rotate(0deg)
-    }
-    100%{
-        transform: rotate(360deg)
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .g-button {
   padding: 0 1em;
@@ -76,8 +80,8 @@ export default {
   > .icon {
     vertical-align: middle;
   }
-  .loading{
-      animation: spin 2s infinite linear;
+  .loading {
+    animation: spin 2s infinite linear;
   }
 }
 </style>
