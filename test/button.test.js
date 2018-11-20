@@ -6,7 +6,7 @@ Vue.config.productionTip = false
 Vue.config.devtools = false
 
 describe('Button', () => {
-
+  // BDD 行为驱动测试  行为描述
   it('存在.', () => {
     expect(Button).to.exist
   })
@@ -79,6 +79,5 @@ describe('Button', () => {
     vm.$on('click', callback)
     vm.$el.click()
     expect(callback).to.have.been.called
-
   })
 })
