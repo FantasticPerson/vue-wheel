@@ -36,23 +36,35 @@
             height: 1em;
             width: 1em;
         }
+
+        .box {
+            margin: 20px;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <g-button> 按钮</g-button>
-        <g-button icon="setting" icon-position="right"> 按钮</g-button>
-        <g-button icon="setting" :loading="loading1" icon-position="left" @click="loading1 = !loading1"> 按钮</g-button>
-        <g-icon name="download"></g-icon>
-        <g-group-button>
+        <div class="box">
+            <g-button> 按钮</g-button>
             <g-button icon="setting" icon-position="right"> 按钮</g-button>
-            <g-button icon="setting" icon-position="right"> 按钮</g-button>
-            <div>
+            <g-button icon="setting" :loading="loading1" icon-position="left" @click="loading1 = !loading1"> 按钮</g-button>
+            <g-icon name="download"></g-icon>
+            <g-group-button>
                 <g-button icon="setting" icon-position="right"> 按钮</g-button>
-            </div>
-        </g-group-button>
+                <g-button icon="setting" icon-position="right"> 按钮</g-button>
+                <div>
+                    <g-button icon="setting" icon-position="right"> 按钮</g-button>
+                </div>
+            </g-group-button>
+        </div>
 
+        <div class="box">
+            <g-input></g-input>
+            <g-input value="123" disabled></g-input>
+            <g-input value="123" readonly></g-input>
+            <g-input value="123" error="姓名不能少于两个字"></g-input>
+        </div>
     </div>
     <div id="test"></div>
     <script src="./src/app.js"></script>
