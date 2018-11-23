@@ -49,8 +49,21 @@
 <body>
     <div id="app">
         <g-row gutter="20">
-            <g-col span="2"></g-col>
-            <g-col span="20" offset="2"></g-col>
+            <g-col span="2" 
+            :phone="{span:12,offset:0}"
+            :ipad="{span:8}"
+            :pc="{span:4}"
+            :narrow-pc="{span:2}"
+            :wide-pc="{span:1}"
+            
+            >1</g-col>
+            <g-col span="20" offset="2"
+            :phone="{span:12,offset:0}"
+            :ipad="{span:16}"
+            :pc="{span:20}"
+            :narrow-pc="{span:22}"
+            :wide-pc="{span:23}"
+            >2</g-col>
         </g-row>
         
         <hr>
