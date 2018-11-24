@@ -37,8 +37,22 @@ new Vue({
     data: {
         loading1: false
     },
-    created(){
-        this.$toast()
+    created() {
+        // this.$toast()
+    },
+    methods: {
+        showMessage() {
+            this.$toast('我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了', {
+                closeButton: {
+                    text: '我知道了',
+                    callback(toast) {
+                        toast.log()
+                        console.log('用户说他知道了')
+                    }
+                },
+                enableHtml:true
+            })
+        }
     }
 })
 
