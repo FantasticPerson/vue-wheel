@@ -63,7 +63,7 @@ export default {
               ...createClasses(ipad,'ipad-'),
               ...createClasses(narrowPc,'narrow-'),
               ...createClasses(pc,'pc-'),
-              ...createClasses(widePc,'ipad-'),
+              ...createClasses(widePc,'wide-'),
             ]
         }
     }
@@ -125,13 +125,13 @@ $class-prefix: offset-;
   }
 }
 @media (min-width: 1201px) {
-  $class-prefix: col-wide-pc-;
+  $class-prefix: col-wide-;
   @for $n from 1 through 100 {
     &.#{$class-prefix}#{$n} {
       width: ($n/24) * 100%;
     }
   }
-  $class-prefix: offset-wide-pc-;
+  $class-prefix: offset-wide-;
   @for $n from 1 through 100 {
     &.#{$class-prefix}#{$n} {
       margin-left: ($n/24) * 100%;
