@@ -42,7 +42,7 @@ new Vue({
     },
     methods: {
         showMessage() {
-            this.$toast('我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了', {
+            this.$toast('<a href="https://www.baidu.com">baidu</a>我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了'+Math.random()*100, {
                 closeButton: {
                     text: '我知道了',
                     callback(toast) {
@@ -50,7 +50,9 @@ new Vue({
                         console.log('用户说他知道了')
                     }
                 },
-                enableHtml:true
+                enableHtml:true,
+                position:'top',
+                autoClose:false
             })
         }
     }
