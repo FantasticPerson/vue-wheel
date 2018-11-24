@@ -5,7 +5,6 @@
 </template>
 <style lang="scss" scoped>
 .header{
-    min-height: 100px;
 }
 </style>
 

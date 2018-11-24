@@ -5,7 +5,6 @@
 </template>
 <style lang="scss" scoped>
 .footer{
-    min-height: 100px;
 }
 </style>
 
