@@ -18,7 +18,7 @@ $height : 40px;
     display: flex;
     height: $height;
     justify-content: flex-start;
-    align-items: center;
+    // align-items: center;
     border: 1px solid red;
     > .actions-wrapper{
         margin-left: auto;
