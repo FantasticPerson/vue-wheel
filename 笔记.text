@@ -14,3 +14,7 @@ vue 自定义标签 是 html 语法  不支持 自闭合
 2.一眼看不懂的代码
 
 mobile first 移动端优先
+
+props vs data
+需要用户 （开发者） 传值 props
+不需要用户 （开发者） 传值，自己去维护 data

@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+import Vue from 'vue'
 export default {
     name:'GuluTabs',
     props:{
@@ -17,8 +18,21 @@ export default {
             validator(value){
                 return ['horizontal','vertical'].indexOf(value) >= 0
             }
+        },
+    },
+    provide(){//提供  事件总线  所有的子元素都能访问到
+        return {
+            eventBus:this.eventBus
         }
-    }    
+    },
+    data(){
+        return {
+            eventBus:new Vue()
+        }
+    },
+    mounted(){
+        this.eventBus.$emit('update:selected',this.selected)
+    }
 }
 </script>
 <style lang="scss" scoped>
