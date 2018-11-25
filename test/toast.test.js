@@ -37,7 +37,7 @@ describe('Toast', () => {
             }).$mount()
             expect(vm.$el.classList.contains('position-bottom')).to.eq(true)
         })
-        it('接受 closeButton 属性', () => {
+        it('接受 closeButton 属性', (done) => {
             const Constructor = Vue.extend(Toast)
             const callback = sinon.fake()
             const vm = new Constructor({
@@ -50,8 +50,11 @@ describe('Toast', () => {
             }).$mount()
             const closeButton = vm.$el.querySelector('.close')
             expect(closeButton.innerText).to.eq('close')
-            closeButton.click()
-            expect(expect(callback).to.have.been.called)
+            setTimeout(()=>{
+                closeButton.click()
+                expect(expect(callback).to.have.been.called)
+                done()
+            },200)
         })
         it('接受 enableHtml 属性', () => {
             const Constructor = Vue.extend(Toast)

@@ -65,8 +65,8 @@ export default {
             }
         },
         updateStyles(){
-            const {line,toast} = this.$refs
             this.$nextTick(()=>{
+                const {line,toast} = this.$refs
                 line.style.height = toast.getBoundingClientRect().height+'px'
             })
         },
