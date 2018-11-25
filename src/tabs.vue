@@ -35,7 +35,7 @@ export default {
             return item.$options.name === 'GuluTabsHead'
         })
         if(tabsHead){
-            let tabsItem = tabsHead.find(item=>{
+            let tabsItem = tabsHead.$children.find(item=>{
                 return item.$options.name === 'GuluTabsItem' && item.name === this.selected
             })
             if(tabsItem){

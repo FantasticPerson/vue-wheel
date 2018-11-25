@@ -18,3 +18,5 @@ mobile first 移动端优先
 props vs data
 需要用户 （开发者） 传值 props
 不需要用户 （开发者） 传值，自己去维护 data
+
+transition 会开启 GPU 加速
