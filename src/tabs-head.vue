@@ -37,7 +37,7 @@ $blue: blue;
   display: flex;
   height: $height;
   position: relative;
-
+  border-bottom: 1px solid #ddd;
   justify-content: flex-start;
   > .line {
     position: absolute;
@@ -47,6 +47,10 @@ $blue: blue;
   }
   > .actions-wrapper {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1em;
   }
 }
 </style>
