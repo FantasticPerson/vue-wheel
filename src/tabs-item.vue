@@ -31,7 +31,7 @@ export default {
     },
     methods:{
         onItemClick(){
-            this.eventBus.$emit('update:selected',this.name)
+            this.eventBus.$emit('update:selected',this.name,this)
         }
     },
     created(){
@@ -42,6 +42,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+$blue:blue;
 .tabs-item {
   flex-shrink: 0;
   padding: 0 1em;
@@ -49,8 +50,10 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
+  
   &.active {
-    background-color: red;
+    color:$blue;
+    font-weight: bold;
   }
 }
 </style>

@@ -31,7 +31,17 @@ export default {
         }
     },
     mounted(){
-        this.eventBus.$emit('update:selected',this.selected)
+        let tabsHead = this.$children.find(item=>{
+            return item.$options.name === 'GuluTabsHead'
+        })
+        if(tabsHead){
+            let tabsItem = tabsHead.find(item=>{
+                return item.$options.name === 'GuluTabsItem' && item.name === this.selected
+            })
+            if(tabsItem){
+                this.eventBus.$emit('update:selected',this.selected,tabsItem)
+            }
+        }
     }
 }
 </script>
