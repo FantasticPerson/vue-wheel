@@ -23,7 +23,6 @@ describe('Input', () => {
                 }
             }).$mount()
             const inputElement = vm.$el.querySelector('input')
-            console.log(inputElement)
             expect(inputElement.value).to.equal('1234')
         })
         it('接收disabled', () => {
