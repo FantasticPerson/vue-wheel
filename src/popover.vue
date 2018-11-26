@@ -3,7 +3,7 @@
         <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click.stop>
             <slot name="content"></slot>
         </div>
-        <span ref="triggerWrapper">
+        <span ref="triggerWrapper" style="display:inline-block">
             <slot></slot>
         </span>
     </div>
@@ -43,7 +43,6 @@ export default {
         },
         onClick(event){
             if(this.$refs.triggerWrapper.contains(event.target)){
-                console.log('onclick')
                 if(this.visible){
                     this.close()
                 } else {
@@ -55,6 +54,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+$border-color: #ddd;
+$border-radius: 4px;
 .popover {
   display: inline-block;
   vertical-align: top;
@@ -63,7 +64,39 @@ export default {
 .content-wrapper {
   position: absolute;
   left: 0;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  //   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  border: 1px solid $border-color;
+  padding: 0.5em 1em;
+  border-radius: $border-radius;
   transform: translateY(-100%) translateX(-50%);
+  margin-top: -12px;
+  max-width: 20em;
+  word-break: break-all;
+  background-color: #FFFFFF;
+  &::before {
+    content: "";
+    display: block;
+    border: 10px solid transparent;
+    border-top-color: $border-color;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-10px);
+  }
+  &::after {
+    content: "";
+    display: block;
+    border: 10px solid transparent;
+    border-top-color: white;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 50%;
+    transform: translateX(-10px);
+  }
 }
 </style>

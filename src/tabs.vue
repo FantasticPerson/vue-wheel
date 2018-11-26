@@ -30,10 +30,15 @@ export default {
             eventBus:new Vue()
         }
     },
-    mounted(){
-        if(this.$children.length === 0){
-            console &&　console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-body，但是你没有写子组件')
+    methods:{
+        checkChildren(){
+            if(this.$children.length === 0){
+                console &&　console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-body，但是你没有写子组件')
+            }
         }
+    },
+    mounted(){
+        this.checkChildren()
         let tabsHead = this.$children.find(item=>{
             return item.$options.name === 'GuluTabsHead'
         })
