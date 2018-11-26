@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" ref="popover" @click.stop="onClick">
+    <div class="popover" ref="popover">
         <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click.stop :class="[`position-${position}`]">
             <slot name="content"></slot>
         </div>
@@ -12,38 +12,78 @@
 export default {
     name:'GuluPopover',
     data(){
-        return {visible:false}
+        return {
+            visible:false,
+        }
     },
     props:{
         position:{
             type:String,
             default:'top',
             validator(value){
-                return ['top','left','bottom','right'].indexOf(value) > 0
+                return ['top','left','bottom','right'].indexOf(value) >= 0
+            }
+        },
+        trigger:{
+            type:String,
+            default:'click',
+            validator(value){
+                return ['click','hover'].indexOf(value) >= 0
             }
         }
     },
+    destroyed(){
+        this.unregisterEvent()
+    },
+    mounted(){
+        this.registerEvent()
+    },
     methods:{
+        unregisterEvent(){
+            if(this.trigger === 'click'){
+                this.$refs.popover.removeEventListener('click',this.onClick)
+            } else {
+                this.$refs.popover.removeEventListener('mouseenter',this.open)
+                this.$refs.popover.removeEventListener('mouseleave',this.close)
+            }
+        },
+        registerEvent(){
+            if(this.trigger === 'click'){
+                this.$refs.popover.addEventListener('click',this.onClick)
+            } else {
+                this.$refs.popover.addEventListener('mouseenter',this.open)
+                this.$refs.popover.addEventListener('mouseleave',this.close)
+            }
+        },
         positionContent(){
             const {triggerWrapper,contentWrapper} = this.$refs
             const {width,height,top,left} = triggerWrapper.getBoundingClientRect()
-            if(this.position === 'top'){
-                contentWrapper.style.left = left + window.scrollX+ 'px'
-                contentWrapper.style.top = top+window.scrollY+ 'px'
-                contentWrapper.style.marginLeft = width/2+'px'
-            } else if(this.position === 'bottom'){
-                contentWrapper.style.left = left + window.scrollX+ 'px'
-                contentWrapper.style.top = top+window.scrollY+ height+'px'
-                contentWrapper.style.marginLeft = width/2+'px'
-            } else if(this.position === 'left'){
-                contentWrapper.style.left = left + window.scrollX+ 'px'
-                contentWrapper.style.top = top+window.scrollY+ height+'px'
-                contentWrapper.style.marginTop = -height/2+'px'
-            } else if(this.position === 'right'){
-                contentWrapper.style.left = left + window.scrollX+width+ 'px'
-                contentWrapper.style.top = top+window.scrollY+ height+'px'
-                contentWrapper.style.marginTop = -height/2+'px'
+            let positionArr = {
+                top:{
+                    top:top+window.scrollY,
+                    left:left + window.scrollX,
+                    marginLeft:width/2,
+                },
+                bottom:{
+                    top:top+window.scrollY+ height,
+                    left:left + window.scrollX,
+                    marginLeft:width/2,
+                },
+                left:{
+                    top:top+window.scrollY+ height,
+                    left:left + window.scrollX,
+                    marginTop:-height/2
+                },
+                right:{
+                    top:top+window.scrollY+ height,
+                    left:left + window.scrollX+width,
+                    marginTop:-height/2
+                }
             }
+            contentWrapper.style.left = positionArr[this.position].left+'px'
+            contentWrapper.style.top = positionArr[this.position].top+'px'
+            contentWrapper.style.marginLeft = positionArr[this.position].marginLeft+'px'
+            contentWrapper.style.marginTop = positionArr[this.position].marginTop+'px'
             document.body.appendChild(contentWrapper)
         },
         onClickDocument(e) {
