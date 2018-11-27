@@ -29,9 +29,6 @@ export default {
     inject:['eventBus'],
     mounted(){
         this.eventBus.$on('update:selected',(names)=>{
-            console.log(names)
-            console.log(this.name)
-            console.log(names.indexOf(this.name))
             if(names.indexOf(this.name) >= 0){
                 this.open = true
             } else {
