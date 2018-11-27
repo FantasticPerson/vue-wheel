@@ -11,6 +11,10 @@ export default {
         single:{
             type:Boolean,
             default:false
+        },
+        selected:{
+            type:Array,
+            default:[]
         }
     },
     data(){
@@ -19,17 +23,38 @@ export default {
         }
     }  ,
     provide(){
-        if(this.single){
-            return {
-                eventBus:this.eventBus
-            }
+        return {
+            eventBus:this.eventBus
         }
-        
     } ,
     mounted(){
-        // this.eventBus.$on('update:selected',(vm)=>{
-        //     if(vm != this)
-        // })
+        this.eventBus.$emit('update:selected',this.selected)
+        this.eventBus.$on('update:addSelected',(name)=>{
+            let copySelected = JSON.parse(JSON.stringify(this.selected))
+            if(this.single){
+                copySelected = [name]
+                this.eventBus.$emit('update:selected',copySelected)
+                this.$emit('update:selected',copySelected)
+            } else {
+                if(copySelected.indexOf(name) < 0){
+                    copySelected.push(name)
+                    this.eventBus.$emit('update:selected',copySelected)
+                    this.$emit('update:selected',copySelected)
+                }
+            }
+        })
+        this.eventBus.$on('update:removeSelected',(name)=>{
+            let copySelected = JSON.parse(JSON.stringify(this.selected))
+            let index = copySelected.indexOf(name)
+            if(index >= 0){
+                copySelected.splice(index,1)
+                this.eventBus.$emit('update:selected',copySelected)
+                this.$emit('update:selected',copySelected)
+            }
+        })
+        this.$children.forEach((item)=>{
+            item.single = this.single
+        })
     }
 }
 </script>

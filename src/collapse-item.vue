@@ -11,38 +11,43 @@ export default {
     name:'GuluCollapseItem',
     data(){
         return {
-            open:false
+            open:false,
+            single:false
         }
     },
     props:{
         title:{
             type:String,
             required:true
+        },
+        name:{
+            type:[String,Number],
+            required:true,
+            default:''
         }
     },
     inject:['eventBus'],
     mounted(){
-        if(this.eventBus){
-            this.eventBus.$on('update:selected',(vm)=>{
-                if(vm != this){
-                    this.close()
-                }
-            })
-        }
+        this.eventBus.$on('update:selected',(names)=>{
+            console.log(names)
+            console.log(this.name)
+            console.log(names.indexOf(this.name))
+            if(names.indexOf(this.name) >= 0){
+                this.open = true
+            } else {
+                this.open = false
+            }
+        })
     },
     methods:{
         toggle(){
             if(this.open){
-                this.open = false
+                console.log('remove')
+                this.eventBus.$emit('update:removeSelected',this.name)
             } else {
-                this.open = true
-                if(this.eventBus){
-                    this.eventBus.$emit('update:selected',this)
-                }
+                console.log('add')
+                this.eventBus.$emit('update:addSelected',this.name)
             }
-        },
-        close(){
-            this.open = false
         }
     }
 }

@@ -52,20 +52,13 @@ Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item',CollapseItem)
 
-
-
-
-
-
-
-
-
 Vue.use(plugin)
 
 new Vue({
     el: '#app',
     data: {
-        loading1: false
+        loading1: false,
+        selectedTab:['2']
     },
     created() {
         // this.$toast()
