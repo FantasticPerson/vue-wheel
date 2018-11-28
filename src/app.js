@@ -27,6 +27,8 @@ import Popover from './popover.vue'
 import Collapse from './collapse.vue'
 import CollapseItem from './collapse-item.vue'
 
+import Cascader from './cascader.vue'
+
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-group-button', ButtonGroup)
@@ -52,32 +54,60 @@ Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item',CollapseItem)
 
+Vue.component('g-cascader',Cascader)
+
 Vue.use(plugin)
 
 new Vue({
     el: '#app',
-    data: {
-        loading1: false,
-        selectedTab:['2']
-    },
+    data(){return  {
+        source:[{
+            name:'浙江',
+            children:[
+                {
+                    name:'嘉兴市',
+                    children:[
+                        {name:'name1'},
+                        {name:'name12'},
+                        {name:'name134'}
+                    ]
+                },
+                {
+                    name:'湖州市',
+                    children:[
+                        {name:'name16'},
+                        {name:'name126'},
+                        {name:'name1346'}
+                    ]
+                },
+                {
+                    name:'杭州市',
+                    children:[
+                        {name:'name167'},
+                        {name:'name1267'},
+                        {name:'name13467'}
+                    ]
+                }
+            ]
+        },{
+            name:'浙江2',
+            children:[
+                {
+                    name:'嘉兴市2',
+                    children:[
+                        {name:'name168'},
+                        {name:'name1268'},
+                        {name:'name13468'}
+                    ]
+                }
+            ]
+        }]
+    }},
     created() {
         // this.$toast()
     },
     methods: {
-        showMessage() {
-            this.$toast('<a href="https://www.baidu.com">baidu</a>我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了我知道了'+Math.random()*100, {
-                closeButton: {
-                    text: '我知道了',
-                    callback(toast) {
-                        toast.log()
-                        console.log('用户说他知道了')
-                    }
-                },
-                enableHtml:true,
-                position:'bottom',
-                autoClose:false
-            })
-        }
+        
     }
 })
 

@@ -22,3 +22,7 @@ props vs data
 transition 会开启 GPU 加速
 
 npx vuepress dev docs
+
+vue 属性不能以 data-开头
+
+vue 属性传值的  时候 属性名不能是驼峰命名

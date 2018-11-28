@@ -6,7 +6,9 @@
   "scripts": {
     "start": "parcel index.html --no-cache",
     "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
+    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -23,10 +25,8 @@
   },
   "homepage": "https://github.com/FantasticPerson/vue-wheel#readme",
   "dependencies": {
-    "vue": "2.5.17",
-    "vue-hot-reload-api": "2.3.1",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "2.3.1"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"
