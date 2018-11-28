@@ -1,8 +1,6 @@
 <template>
   <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">
-      <slot></slot>
-    </div>
+    <div class="trigger" @click="popoverVisible = !popoverVisible">{{result ||　　'&nbsp;'}}</div>
     <div class="popoverWrapper" v-if="popoverVisible">
       <cascader-items
         class="popover"
@@ -18,14 +16,14 @@
 import CascaderItems from './cascader-items'
 export default {
     name:'GuluCascader',
-    data(){
-        return {
-            popoverVisible:false
-        }
-    },
     methods:{
         onUpdateSelected(newSelected){
             this.$emit('update:selected',newSelected)
+        }
+    },
+    data(){
+        return {
+            popoverVisible:false
         }
     },
     props:{
@@ -41,6 +39,11 @@ export default {
             default:()=>[]
         }
     },
+    computed:{
+        result(){
+            return this.selected.map(item=>item.name).join('/')
+        }
+    },
     components:{
         CascaderItems
     }
@@ -51,9 +54,14 @@ export default {
 .cascader {
   position: relative;
   .trigger {
-    border: 1px solid red;
-    height: 32px;
-    width: 100px;
+    height: $input-height;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1em;
+    min-width: 10em;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
   }
   .popoverWrapper {
     position: absolute;
@@ -61,6 +69,7 @@ export default {
     left: 0;
     background-color: white;
     display: flex;
+    margin-top: 8px;
     @extend .box-shadow;
   }
 }
