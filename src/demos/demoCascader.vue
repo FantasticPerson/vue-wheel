@@ -1,6 +1,11 @@
 <template>
   <div style="padding:100px">
-    <g-cascader :source="source" popover-height="200px"></g-cascader>
+    <g-cascader
+      popover-height="200px"
+      :source="source"
+      :selected="selected"
+      @update:selected="selected=$event"
+    ></g-cascader>
   </div>
 </template>
 <script>
@@ -8,6 +13,7 @@ import Cascader from '../packages/cascader'
 export default {
     data(){
         return {
+            selected:[],
             source:[{
             name:'浙江',
             children:[

@@ -1,13 +1,19 @@
 <template>
   <div class="cascaderItem" :style="{height:height}">
     <div class="left">
-      <div class="label" v-for="item in items" @click="leftSelected = item">
+      <div class="label" v-for="item in items" @click="onClickLabel(item)">
         {{item.name}}
         <span v-if="item.children">></span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <gulu-cascader-item :items="rightItems" :height="height"></gulu-cascader-item>
+      <gulu-cascader-item
+        :items="rightItems"
+        :height="height"
+        :selected="selected"
+        :level="level+1"
+        @update:selected="onUpdateSelected"
+      ></gulu-cascader-item>
     </div>
   </div>
 </template>
@@ -21,6 +27,14 @@ export default {
       },
       height:{
         type:String
+      },
+      selected:{
+        type:Array,
+        default:()=>[]
+      },
+      level:{
+        type:Number,
+        default:0
       }
     },
     data(){
@@ -28,23 +42,36 @@ export default {
         leftSelected:null
       }
     },
+    methods:{
+      onClickLabel(item){
+        console.log(item)
+        // this.$set(this.selected,this.level,item)
+        // this.selected.push(item)
+        let copy =JSON.parse(JSON.stringify(this.selected))
+        copy[this.level] = item
+        this.$emit('update:selected',copy)
+      },
+      onUpdateSelected(newSelected){
+        this.$emit('update:selected',newSelected)
+      }
+    },
     computed:{
       rightItems(){
-        if(this.leftSelected && this.leftSelected.children){
-          return this.leftSelected.children
-        } else {
+        console.log(this.selected)
+        if(this.selected[this.level] && this.selected[this.level].children){
+          return this.selected[this.level].children
+        }else {
           return null
         }
       }
     },
     mounted(){
-      console.log(this.height)
     },
     components:{}
 }
 </script>
 <style lang="scss" scoped>
-@import '../assets/_var.scss';
+@import "../assets/_var.scss";
 .cascaderItem {
   display: flex;
   align-items: flex-start;
@@ -55,9 +82,9 @@ export default {
   }
   .right {
     height: 100%;
-    border-left: 1px solid $border-color-light; 
+    border-left: 1px solid $border-color-light;
   }
-  .label{
+  .label {
     padding: 0.3em 1em;
   }
 }
