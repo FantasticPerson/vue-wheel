@@ -80,10 +80,12 @@ export default {
   height: 100px;
   .left {
     height: 100%;
+    overflow: auto;
   }
   .right {
     height: 100%;
     border-left: 1px solid $border-color-light;
+    overflow: auto;
   }
   .label {
     padding: 0.3em 1em;

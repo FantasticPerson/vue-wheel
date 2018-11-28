@@ -3,13 +3,13 @@
     <g-cascader
       popover-height="200px"
       :source="source"
-      :selected="selected"
-      @update:selected="selected=$event"
+      :selected.sync="selected"
     ></g-cascader>
   </div>
 </template>
 <script>
 import Cascader from '../packages/cascader'
+import db from './city_db'
 export default {
     data(){
         return {
