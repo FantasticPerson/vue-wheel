@@ -45,9 +45,11 @@ export default {
     methods:{
       onClickLabel(item){
         console.log(item)
+
         // this.$set(this.selected,this.level,item)
         // this.selected.push(item)
         let copy =JSON.parse(JSON.stringify(this.selected))
+        copy.splice(this.level+1)
         copy[this.level] = item
         this.$emit('update:selected',copy)
       },
@@ -57,7 +59,6 @@ export default {
     },
     computed:{
       rightItems(){
-        console.log(this.selected)
         if(this.selected[this.level] && this.selected[this.level].children){
           return this.selected[this.level].children
         }else {
