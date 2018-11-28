@@ -1,38 +1,20 @@
 {
-  "name": "gulu-wheel-ui",
-  "version": "0.0.2",
-  "description": "这是一个UI框架",
-  "main": "index.js",
+  "name": "gulu-wheel",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "parcel index.html --no-cache",
-    "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FantasticPerson/vue-wheel.git"
-  },
-  "keywords": [
-    "vue",
-    "ui"
-  ],
-  "author": "wudandan",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/FantasticPerson/vue-wheel/issues"
-  },
-  "homepage": "https://github.com/FantasticPerson/vue-wheel#readme",
   "dependencies": {
-    "vue": "^2.5.17",
-    "vue-hot-reload-api": "2.3.1"
-  },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
+    "vue": "^2.5.17"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "2.3.0",
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-unit-mocha": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/test-utils": "^1.0.0-beta.20",
     "chai": "^4.1.2",
     "chai-spies": "^1.0.0",
     "karma": "^2.0.4",
@@ -44,9 +26,20 @@
     "mocha": "^5.2.0",
     "node-sass": "4.10.0",
     "parcel-bundler": "^1.9.2",
+    "sass-loader": "7.1.0",
     "sinon": "^6.0.1",
     "sinon-chai": "3.2.0",
-    "vue-template-compiler": "^2.5.16",
+    "vue-template-compiler": "^2.5.17",
     "vuepress": "0.14.8"
-  }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

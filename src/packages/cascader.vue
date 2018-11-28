@@ -32,7 +32,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "./_var.scss";
+@import "../assets/_var.scss";
 .cascader {
     position: relative;
     .trigger{
