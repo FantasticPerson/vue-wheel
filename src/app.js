@@ -99,6 +99,34 @@ new Vue({
                         {name:'name1268'},
                         {name:'name13468'}
                     ]
+                },
+                {
+                    name:'嘉兴市21',
+                    children:[
+                        {name:'name1681'},
+                        {name:'name12681'},
+                        {name:'name134681'}
+                    ]
+                }
+            ]
+        },{
+            name:'浙江2',
+            children:[
+                {
+                    name:'嘉兴市2',
+                    children:[
+                        {name:'name168'},
+                        {name:'name1268'},
+                        {name:'name13468'}
+                    ]
+                },
+                {
+                    name:'嘉兴市23',
+                    children:[
+                        {name:'name1683'},
+                        {name:'name12683'},
+                        {name:'name134683'}
+                    ]
                 }
             ]
         }]
