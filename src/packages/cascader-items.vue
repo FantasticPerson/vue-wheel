@@ -30,10 +30,6 @@ export default {
         return false
       },
       onClickLabel(item){
-        console.log(item)
-
-        // this.$set(this.selected,this.level,item)
-        // this.selected.push(item)
         let copy =JSON.parse(JSON.stringify(this.selected))
         copy.splice(this.level+1)
         copy[this.level] = item
