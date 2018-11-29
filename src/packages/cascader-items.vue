@@ -3,7 +3,7 @@
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
         {{item.name}}
-        <span v-if="item.children">></span>
+        <span v-if="showArrow(item)">></span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -19,6 +19,22 @@
 </template>
 <script>
 export default {
+    
+    methods:{
+      onClickLabel(item){
+        console.log(item)
+
+        // this.$set(this.selected,this.level,item)
+        // this.selected.push(item)
+        let copy =JSON.parse(JSON.stringify(this.selected))
+        copy.splice(this.level+1)
+        copy[this.level] = item
+        this.$emit('update:selected',copy)
+      },
+      onUpdateSelected(newSelected){
+        this.$emit('update:selected',newSelected)
+      }
+    },
     name:"GuluCascaderItem",
     props:{
       items:{
@@ -35,6 +51,9 @@ export default {
       level:{
         type:Number,
         default:0
+      },
+      loadData:{
+          type:Function
       }
     },
     data(){
@@ -43,18 +62,13 @@ export default {
       }
     },
     methods:{
-      onClickLabel(item){
-        console.log(item)
-
-        // this.$set(this.selected,this.level,item)
-        // this.selected.push(item)
-        let copy =JSON.parse(JSON.stringify(this.selected))
-        copy.splice(this.level+1)
-        copy[this.level] = item
-        this.$emit('update:selected',copy)
-      },
-      onUpdateSelected(newSelected){
-        this.$emit('update:selected',newSelected)
+      showArrow(item){
+        if(this.loadData && !item.isLeaf){
+          return true
+        } else if(item.children){
+          return true
+        }
+        return false
       }
     },
     computed:{
@@ -64,7 +78,8 @@ export default {
         }else {
           return null
         }
-      }
+      },
+      
     },
     mounted(){
     },

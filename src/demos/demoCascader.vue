@@ -4,89 +4,58 @@
       popover-height="200px"
       :source="source"
       :selected.sync="selected"
+      :load-data="loadData"
     ></g-cascader>
   </div>
 </template>
 <script>
 import Cascader from '../packages/cascader'
 import db from './city_db'
+
+function ajax(parentId=0){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(db.filter(item=>item.pId == parentId))
+        },3000)
+    })
+}
+
 export default {
+    created(){
+        ajax(0).then(res=>{
+            res.forEach(node=>{
+                if(db.find(item=>item.pId === node.id)){
+                    node.isLeaf = false
+                } else {
+                    node.isLeaf = true
+                }
+            })
+            this.source = res
+        })
+    },
+    methods:{
+        loadData(node,callback){
+            let {name,id,pId} = node
+            ajax(id).then(result=>{
+                result.forEach(node=>{
+                    if(db.find(item=>item.pId === node.id)){
+                        node.isLeaf = false
+                    } else {
+                        node.isLeaf = true
+                    }
+                })
+                callback && callback(result)
+            })
+        }
+    },
+    components:{
+        gCascader:Cascader
+    },
     data(){
         return {
             selected:[],
-            source:[{
-            name:'浙江',
-            children:[
-                {
-                    name:'嘉兴市',
-                    children:[
-                        {name:'name1'},
-                        {name:'name12'},
-                        {name:'name134'}
-                    ]
-                },
-                {
-                    name:'湖州市',
-                    children:[
-                        {name:'name16'},
-                        {name:'name126'},
-                        {name:'name1346'}
-                    ]
-                },
-                {
-                    name:'杭州市',
-                    children:[
-                        {name:'name167'},
-                        {name:'name1267'},
-                        {name:'name13467'}
-                    ]
-                }
-            ]
-        },{
-            name:'浙江2',
-            children:[
-                {
-                    name:'嘉兴市2',
-                    children:[
-                        {name:'name168'},
-                        {name:'name1268'},
-                        {name:'name13468'}
-                    ]
-                },
-                {
-                    name:'嘉兴市21',
-                    children:[
-                        {name:'name1681'},
-                        {name:'name12681'},
-                        {name:'name134681'}
-                    ]
-                }
-            ]
-        },{
-            name:'浙江2',
-            children:[
-                {
-                    name:'嘉兴市2',
-                    children:[
-                        {name:'name168'},
-                        {name:'name1268'},
-                        {name:'name13468'}
-                    ]
-                },
-                {
-                    name:'嘉兴市23',
-                    children:[
-                        {name:'name1683'},
-                        {name:'name12683'},
-                        {name:'name134683'}
-                    ]
-                }
-            ]
-        }]
+            source:[]
     }},
-    components:{
-        gCascader:Cascader
-    }
 }
 </script>
 <style lang="scss" scoped>

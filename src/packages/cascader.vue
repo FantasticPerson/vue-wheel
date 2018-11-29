@@ -1,12 +1,13 @@
 <template>
   <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">{{result ||　　'&nbsp;'}}</div>
+    <div class="trigger" @click="popoverVisible = !popoverVisible">{{result || '&nbsp;'}}</div>
     <div class="popoverWrapper" v-if="popoverVisible">
       <cascader-items
         class="popover"
         :items="source"
         :height="popoverHeight"
         :selected="selected"
+        :loadData="loadData"
         @update:selected="onUpdateSelected"
       ></cascader-items>
     </div>
@@ -17,8 +18,34 @@ import CascaderItems from './cascader-items'
 export default {
     name:'GuluCascader',
     methods:{
+        findSelectedItem(children,id){
+            let found = children.find(item=>item.id === id)
+            if(found) return found
+            else {
+                for(let i=0;i<children.length;i++){
+                    if(children[i].children){
+                        let found = this.findSelectedItem(children[i].children,id)
+                        if(found) return found
+                    }
+                }
+            }
+            return undefined
+        },
         onUpdateSelected(newSelected){
             this.$emit('update:selected',newSelected)
+            let lastItem = newSelected[newSelected.length-1]
+            let updateSource = (result)=>{
+                if(Array.isArray(result) && result.length > 0){
+                    let copy = JSON.parse(JSON.stringify(this.source))
+                    let found = this.findSelectedItem(this.source,lastItem.id)
+                    if(found){
+                        this.$set(found,'children',result)
+                    }
+                }
+            }
+            if(!lastItem.isLeaf){
+                this.loadData(lastItem,updateSource.bind(this))
+            }
         }
     },
     data(){
@@ -37,6 +64,9 @@ export default {
         selected:{
             type:Array,
             default:()=>[]
+        },
+        loadData:{
+            type:Function
         }
     },
     computed:{
