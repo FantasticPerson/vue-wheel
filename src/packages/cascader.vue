@@ -1,6 +1,6 @@
 <template>
-  <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">{{result || '&nbsp;'}}</div>
+  <div class="cascader" ref="cascader">
+    <div class="trigger" @click="toggle">{{result || '&nbsp;'}}</div>
     <div class="popoverWrapper" v-if="popoverVisible">
       <cascader-items
         class="popover"
@@ -15,9 +15,32 @@
 </template>
 <script>
 import CascaderItems from './cascader-items'
+import Popover from './popover'
 export default {
     name:'GuluCascader',
     methods:{
+        open(){
+            this.popoverVisible = true
+            this.$nextTick(()=>{
+                document.addEventListener('click',this.onClickDoucment)
+            })
+        },
+        close(){
+            this.popoverVisible = false
+            document.removeEventListener('click',this.onClickDoucment)
+        },
+        toggle(){
+            if(this.popoverVisible){
+                this.close()
+            } else {
+                this.open()
+            }
+        },
+        onClickDoucment(e){
+            let {cascader} = this.$refs
+            if(cascader === e.target || cascader.contains(e.target)) return
+            this.close()
+        },
         findSelectedItem(children,id){
             let found = children.find(item=>item.id === id)
             if(found) return found
@@ -82,6 +105,7 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/_var.scss";
 .cascader {
+  display: inline-block;
   position: relative;
   .trigger {
     height: $input-height;

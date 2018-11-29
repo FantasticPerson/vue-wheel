@@ -21,6 +21,14 @@
 export default {
     
     methods:{
+      showArrow(item){
+        if(this.loadData && !item.isLeaf){
+          return true
+        } else if(item.children){
+          return true
+        }
+        return false
+      },
       onClickLabel(item){
         console.log(item)
 
@@ -61,16 +69,6 @@ export default {
         leftSelected:null
       }
     },
-    methods:{
-      showArrow(item){
-        if(this.loadData && !item.isLeaf){
-          return true
-        } else if(item.children){
-          return true
-        }
-        return false
-      }
-    },
     computed:{
       rightItems(){
         if(this.selected[this.level] && this.selected[this.level].children){
@@ -104,6 +102,7 @@ export default {
   }
   .label {
     padding: 0.3em 1em;
+    white-space: nowrap;
   }
 }
 </style>
