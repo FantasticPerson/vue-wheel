@@ -124,6 +124,7 @@ export default {
     background-color: white;
     display: flex;
     margin-top: 8px;
+    z-index: 1;
     @extend .box-shadow;
   }
 }
